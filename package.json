@@ -1,0 +1,35 @@
+{
+  "name": "express-social-app",
+  "version": "1.0.0",
+  "description": "An example social app built on Node.js, Express, and MongoDB",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [
+    "node.js",
+    "express",
+    "mongodb",
+    "passport",
+    "mongoose",
+    "social-app"
+  ],
+  "author": "Aaron Zemetres",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "1.18.2",
+    "connect-flash": "0.1.1",
+    "cookie-parser": "1.4.3",
+    "ejs": "2.5.7",
+    "express": "4.15.5",
+    "express-session": "1.15.5",
+    "mongoose": "4.11.13",
+    "passport": "0.4.0",
+    "passport-local": "1.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "1.12.1"
+  }
+}

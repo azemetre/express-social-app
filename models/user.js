@@ -20,7 +20,7 @@ userSchema.pre("save", (done) => {
     return done();
   }
 
-  bcrypt.genSalt(SALT_FACTOR, (err, salt) {
+  bcrypt.genSalt(SALT_FACTOR, (err, salt) => {
     if (err) { return done(err); }
       bcrypt.hash(user.password, salt, noop, (err, hashedPassword) => {
       if (err) { return done(err); }

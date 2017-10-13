@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Learn About Me - A Social App built on Express</title>
-  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/css/bootstrap.min.css">
 </head>
 <body>
   <div class="navbar navbar-default navbar-static-top" role="navigation">
@@ -29,6 +29,7 @@
   </div>
 
   <div class="container">
+
     <% errors.forEach(function(error) { %>
       <div class="alert alert-danger" role="alert">
         <%= error %>
@@ -40,4 +41,6 @@
         <%= info %>
       </div>
     <% }) %>
+
   </div>
+  

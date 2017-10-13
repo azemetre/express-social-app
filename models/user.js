@@ -1,10 +1,9 @@
-const bcrypt = require('bcrypt-nodejs');
-const mongoose = require('mongoose');
+const bcrypt = require("bcrypt-nodejs");
+const mongoose = require("mongoose");
 
-let SALT_FACTOR = 10;
-let noop = function() {};
+const SALT_FACTOR = 10;
 
-let userSchema = mongoose.Schema({
+const userSchema = mongoose.Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
@@ -12,32 +11,32 @@ let userSchema = mongoose.Schema({
   bio: String
 });
 
-userSchema.pre("save", (done) => {
-  // may not need due to es6 arrow functions
-  // let user = this;
+const noop = function() {};
+
+userSchema.pre("save", function(done) {
+  let user = this;
 
   if (!user.isModified("password")) {
     return done();
   }
 
-  bcrypt.genSalt(SALT_FACTOR, (err, salt) => {
+  bcrypt.genSalt(SALT_FACTOR, function(err, salt) {
     if (err) { return done(err); }
-      bcrypt.hash(user.password, salt, noop, (err, hashedPassword) => {
+    bcrypt.hash(user.password, salt, noop, function(err, hashedPassword) {
       if (err) { return done(err); }
       user.password = hashedPassword;
       done();
     });
   });
-
 });
 
-userSchema.methods.checkPassword = (guess, done) => {
-  bcrypt.compare(guess, this.password, (err, isMatch) => {
+userSchema.methods.checkPassword = function(guess, done) {
+  bcrypt.compare(guess, this.password, function(err, isMatch) {
     done(err, isMatch);
   });
 };
 
-userSchema.methods.name = () => {
+userSchema.methods.name = function() {
   return this.displayName || this.username;
 };
 

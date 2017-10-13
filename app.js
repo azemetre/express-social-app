@@ -12,15 +12,17 @@ const express = require('express'),
 const setUpPassport = require('./setuppassport');
 const routes = require('./routes');
 
+const app = express();
+
 mongoose.connect(process.env.MONGODB_ADDRESS);
 setUpPassport();
-
-const app = express();
 
 app.set("port", process.env.PORT || 3333);
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
+
+app.use('/static', express.static(path.join(__dirname, '/static')));
 
 app.use(bodyParser.urlencoded({ extended:false }));
 app.use(cookieParser());
@@ -29,6 +31,7 @@ app.use(session({
   resave: true,
   saveUninitalized: true
 }));
+
 app.use(flash());
 
 app.use(passport.initialize());

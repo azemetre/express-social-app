@@ -16,7 +16,7 @@ let ensureAuthenticated = (req, res, next) => {
 
 router.use((req, res, next) => {
   res.locals.currentUser = req.user;
-  res.locals.error = req.flash("error");
+  res.locals.errors = req.flash("error");
   res.locals.infos = req.flash("info");
   next();
 });
@@ -50,11 +50,13 @@ router.get("/signup", (req, res) => {
 });
 
 router.post("/signup", (req, res, next) => {
+
   let username = req.body.username;
   let password = req.body.password;
 
   User.findOne({ username: username }, (err, user) => {
-    if (err) { return next(err) };
+
+    if (err) { return next(err); }
     if (user) {
       req.flash("error", "User already exists");
       return res.redirect("/signup");

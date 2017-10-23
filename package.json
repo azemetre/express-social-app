@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
+    "start:prod": "forever app.js",
     "dev": "nodemon app.js",
     "test": "mocha"
   },
@@ -30,6 +31,7 @@
     "express": "4.15.5",
     "express-enforces-ssl": "1.1.0",
     "express-session": "1.15.5",
+    "forever": "0.15.3",
     "helmet": "3.9.0",
     "mongoose": "4.11.13",
     "ms": "2.0.0",

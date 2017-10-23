@@ -7,7 +7,8 @@ const express = require('express'),
       cookieParser = require('cookie-parser'),
       passport = require('passport'),
       session = require('express-session'),
-      flash = require('connect-flash');
+      flash = require('connect-flash'),
+      enforceSSL = require('express-enforces-ssl');
 
 const setUpPassport = require('./setuppassport');
 const routes = require('./routes');
@@ -38,6 +39,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(routes);
+
+app.enable("trust proxy");
+app.use(enforceSSL());
 
 app.listen(app.get("port"), () => {
   console.log("Server started on port " + app.get("port"));

@@ -1,5 +1,6 @@
 const express = require('express'),
-      passport = require('passport');
+      passport = require('passport'),
+      csrf = require('csurf');
 
 const User = require('./models/user');
 
@@ -84,7 +85,7 @@ router.get("/users/:username", (req, res, next) => {
 });
 
 router.get("/edit", ensureAuthenticated, (req, res) => {
-  res.render("edit");
+  res.render("edit", { csrfToken: req.csrfToken });
 });
 
 router.post("/edit", ensureAuthenticated, (req, res, next) => {

@@ -10,7 +10,8 @@ const express = require('express'),
       flash = require('connect-flash'),
       enforceSSL = require('express-enforces-ssl'),
       helmet = require('helmet'),
-      ms = require('ms');
+      ms = require('ms')
+      csrf = require('csurf');
 
 const setUpPassport = require('./setuppassport');
 const routes = require('./routes');
@@ -44,6 +45,15 @@ app.use(routes);
 
 app.enable("trust proxy");
 app.use(enforceSSL());
+
+app.use((err, req, res, next) => {
+  if (err.code !== 'EBADCSRFTOKEN') {
+    next(err);
+    return;
+  }
+  res.status(403);
+  res.send("CSRF error.");
+});
 
 app.use(helmet.hsts({
   maxAge: ms("1 year"),

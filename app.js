@@ -60,6 +60,8 @@ app.use(helmet.hsts({
   includeSubdomains: true
 }));
 
+app.disable("x-powered-by");
+
 app.listen(app.get("port"), () => {
   console.log("Server started on port " + app.get("port"));
 });
